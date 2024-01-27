@@ -20,8 +20,8 @@ func (s *Service) GetUser(tgUser *illuminate.User, isPrivate bool, promo *string
 		if tgUser.FirstName != user.FirstName {
 			mustUpdate["first_name"] = tgUser.FirstName
 		}
-		if string(tgUser.Username) != user.Username {
-			mustUpdate["username"] = string(tgUser.Username)
+		if tgUser.Username != user.Username {
+			mustUpdate["username"] = tgUser.Username
 		}
 		if len(mustUpdate) > 0 {
 			if err := s.db.Model(&entity.User{}).Where("id", user.ID).Updates(mustUpdate).Error; err != nil {
@@ -32,9 +32,9 @@ func (s *Service) GetUser(tgUser *illuminate.User, isPrivate bool, promo *string
 		return &user, nil
 	}
 
-	user.ID = int64(tgUser.ID)
+	user.ID = tgUser.ID
 	user.FirstName = tgUser.FirstName
-	user.Username = string(tgUser.Username)
+	user.Username = tgUser.Username
 
 	if promo != nil {
 		p, err := entity.GetPromoByName(s.db, *promo)
@@ -49,4 +49,20 @@ func (s *Service) GetUser(tgUser *illuminate.User, isPrivate bool, promo *string
 	}
 
 	return &user, nil
+}
+
+func (s *Service) SetUserBotState(user *entity.User, state string, stateContext ...string) error {
+	mustUpdate := make(map[string]any, 2)
+	mustUpdate["bot_state"] = state
+	if len(stateContext) > 0 {
+		mustUpdate["bot_state_context"] = stateContext[0]
+	}
+	return s.db.Model(&entity.User{}).Where("id", user.ID).Updates(mustUpdate).Error
+}
+
+func (s *Service) RemoveUserBotState(user *entity.User) error {
+	return s.db.Model(&entity.User{}).Where("id", user.ID).Updates(map[string]any{
+		"bot_state":         nil,
+		"bot_state_context": nil,
+	}).Error
 }

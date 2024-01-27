@@ -15,7 +15,7 @@ func (h *Handler) CallbackQueryAutoAnswer(ctx *router.Context) error {
 		return err
 	}
 	if ctx.Update.CallbackQuery != nil {
-		_, _ = h.bot.AnswerCallbackQuery(ctx.Context, ctx.Update.CallbackQuery.ID, nil)
+		_, _ = h.bot.AnswerCallbackQuery(ctx.Update.CallbackQuery.ID, nil)
 	}
 	return nil
 }
@@ -66,6 +66,10 @@ func (h *Handler) UserMiddleware(ctx *router.Context) error {
 	}
 
 	ctx.Context = context.WithValue(ctx.Context, userCtxKey, user)
+
+	if user.BotState != nil {
+		ctx.SetState(*user.BotState)
+	}
 
 	return ctx.Next()
 }

@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"github.com/kbgod/illuminate"
-	zerologadapter "github.com/kbgod/illuminate/log/adapter/zerolog"
 	"github.com/kbgod/pigfish/config"
 	"github.com/kbgod/pigfish/internal/database"
 	"github.com/kbgod/pigfish/internal/handler"
@@ -50,17 +49,13 @@ func main() {
 		cancel()
 	}()
 
-	botClient := illuminate.NewBot(
-		illuminate.WithToken(cfg.BotToken),
-		illuminate.WithLogger(zerologadapter.NewAdapter(observer.Logger)),
-	)
-	me, err := botClient.GetMe(ctx, nil)
+	botClient, err := illuminate.NewBot(cfg.BotToken, nil)
 	if err != nil {
-		observer.Logger.Fatal().Err(err).Msg("get bot info")
+		observer.Logger.Fatal().Err(err).Msg("create bot client")
 	}
-	observer.Logger.Info().Str("username", me.Username.PeerID()).Msg("bot authorized")
+	observer.Logger.Info().Str("username", botClient.Username).Msg("bot authorized")
 
-	h := handler.New(svc, botClient, me)
+	h := handler.New(svc, botClient, botClient.User)
 
 	if err := h.Run(ctx); err != nil {
 		observer.Logger.Fatal().Err(err).Msg("run handler")

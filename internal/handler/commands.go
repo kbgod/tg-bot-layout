@@ -1,20 +1,19 @@
 package handler
 
 import (
-	"context"
 	"fmt"
 	"github.com/kbgod/illuminate"
 )
 
-func (h *Handler) initCommands(ctx context.Context) error {
-	ok, err := h.bot.SetMyCommands(ctx, []illuminate.BotCommand{
+func (h *Handler) initCommands() error {
+	ok, err := h.bot.SetMyCommands([]illuminate.BotCommand{
 		{
 			Command:     "start",
-			Description: "привітальне меню",
+			Description: "start page",
 		},
 		{
-			Command:     "help",
-			Description: "допомога",
+			Command:     "set_my_name",
+			Description: "test FSM",
 		},
 	}, nil)
 	if err != nil {

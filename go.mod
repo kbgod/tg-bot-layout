@@ -6,7 +6,7 @@ require (
 	github.com/caarlos0/env/v8 v8.0.0
 	github.com/go-gormigrate/gormigrate/v2 v2.1.1
 	github.com/joho/godotenv v1.5.1
-	github.com/kbgod/illuminate v0.0.0-20231101161451-b15b85f5042a
+	github.com/kbgod/illuminate v0.0.0-20240102201621-4eb071b2370a
 	github.com/rs/zerolog v1.31.0
 	github.com/shopspring/decimal v1.3.1
 	gorm.io/driver/postgres v1.5.4
