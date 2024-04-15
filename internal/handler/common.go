@@ -56,7 +56,7 @@ func (h *Handler) UserMiddleware(ctx *router.Context) error {
 		isPrivate = true
 	}
 	var promo *string
-	if isCommand(ctx.Update, "start") {
+	if isCommand(ctx.Update, "/start") {
 		promo = new(string)
 		*promo = getCommandArguments(ctx.Update)
 	}
