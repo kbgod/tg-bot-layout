@@ -3,11 +3,12 @@ package handler
 import (
 	"context"
 	"fmt"
+	"runtime/debug"
+	"strings"
+
 	"github.com/kbgod/illuminate"
 	"github.com/kbgod/illuminate/router"
 	"github.com/kbgod/pigfish/internal/entity"
-	"runtime/debug"
-	"strings"
 )
 
 func (h *Handler) CallbackQueryAutoAnswer(ctx *router.Context) error {
@@ -57,12 +58,18 @@ func (h *Handler) UserMiddleware(ctx *router.Context) error {
 	}
 	var promo *string
 	if isCommand(ctx.Update, "/start") {
-		promo = new(string)
-		*promo = getCommandArguments(ctx.Update)
+		args := getCommandArguments(ctx.Update)
+		if args != "" {
+			promo = new(string)
+			*promo = args
+		}
 	}
 	user, err := h.svc.GetUser(tgUser, isPrivate, promo)
 	if err != nil {
 		return fmt.Errorf("user middleware: %w", err)
+	}
+	if user == nil {
+		return nil
 	}
 
 	ctx.Context = context.WithValue(ctx.Context, userCtxKey, user)

@@ -3,6 +3,7 @@ package service
 import (
 	"errors"
 	"fmt"
+
 	"github.com/kbgod/illuminate"
 	"github.com/kbgod/pigfish/internal/entity"
 	"gorm.io/gorm"
@@ -30,6 +31,9 @@ func (s *Service) GetUser(tgUser *illuminate.User, isPrivate bool, promo *string
 		}
 
 		return &user, nil
+	}
+	if !isPrivate {
+		return nil, nil
 	}
 
 	user.ID = tgUser.ID
