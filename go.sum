@@ -25,6 +25,8 @@ github.com/kbgod/illuminate v0.0.0-20231101161451-b15b85f5042a h1:gaDZQN3FJJKeGb
 github.com/kbgod/illuminate v0.0.0-20231101161451-b15b85f5042a/go.mod h1:9dIK5JP1ID1hu1WGHFOyl8LNEnkYwAtDQ61MlkPLESo=
 github.com/kbgod/illuminate v0.0.0-20240102201621-4eb071b2370a h1:7v5KrKA0EsZmCchydQlCOYGRYhwPomROonITAMm/eIE=
 github.com/kbgod/illuminate v0.0.0-20240102201621-4eb071b2370a/go.mod h1:9dIK5JP1ID1hu1WGHFOyl8LNEnkYwAtDQ61MlkPLESo=
+github.com/kbgod/illuminate v0.0.0-20240925133302-5b84c763041e h1:5WTF/PuH1dtwzrIuplC35YUzRutgerhxKWO/qF+cOtE=
+github.com/kbgod/illuminate v0.0.0-20240925133302-5b84c763041e/go.mod h1:9dIK5JP1ID1hu1WGHFOyl8LNEnkYwAtDQ61MlkPLESo=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=
 github.com/mattn/go-colorable v0.1.13/go.mod h1:7S9/ev0klgBDR4GtXTXX8a3vIGJpMovkB8vQcUbaXHg=
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=

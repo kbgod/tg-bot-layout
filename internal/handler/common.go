@@ -8,7 +8,7 @@ import (
 
 	"github.com/kbgod/illuminate"
 	"github.com/kbgod/illuminate/router"
-	"github.com/kbgod/pigfish/internal/entity"
+	"github.com/kbgod/tg-bot-layout/internal/entity"
 )
 
 func (h *Handler) CallbackQueryAutoAnswer(ctx *router.Context) error {
@@ -16,7 +16,7 @@ func (h *Handler) CallbackQueryAutoAnswer(ctx *router.Context) error {
 		return err
 	}
 	if ctx.Update.CallbackQuery != nil {
-		_, _ = h.bot.AnswerCallbackQuery(ctx.Update.CallbackQuery.ID, nil)
+		_, _ = h.bot.AnswerCallbackQueryWithContext(ctx.Context, ctx.Update.CallbackQuery.Id, nil)
 	}
 	return nil
 }

@@ -3,20 +3,20 @@ package handler
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/kbgod/illuminate"
 	"github.com/kbgod/illuminate/router"
-	"github.com/kbgod/pigfish/internal/service"
-	"time"
+	"github.com/kbgod/tg-bot-layout/internal/service"
 )
 
 type Handler struct {
-	svc     *service.Service
-	bot     *illuminate.Bot
-	botInfo illuminate.User
+	svc *service.Service
+	bot *illuminate.Bot
 }
 
-func New(svc *service.Service, bot *illuminate.Bot, botInfo illuminate.User) *Handler {
-	return &Handler{svc: svc, bot: bot, botInfo: botInfo}
+func New(svc *service.Service, bot *illuminate.Bot) *Handler {
+	return &Handler{svc: svc, bot: bot}
 }
 
 func (h *Handler) Run(ctx context.Context) error {
@@ -41,7 +41,7 @@ func (h *Handler) Run(ctx context.Context) error {
 
 	<-ctx.Done()
 
-	h.svc.Observer.Logger.Info().Str("username", h.botInfo.Username).Msg("bot stopped")
+	h.svc.Observer.Logger.Info().Str("username", h.bot.Username).Msg("bot stopped")
 	return nil
 }
 

@@ -2,17 +2,18 @@ package main
 
 import (
 	"context"
-	"github.com/kbgod/illuminate"
-	"github.com/kbgod/pigfish/config"
-	"github.com/kbgod/pigfish/internal/database"
-	"github.com/kbgod/pigfish/internal/handler"
-	observerpkg "github.com/kbgod/pigfish/internal/observer"
-	"github.com/kbgod/pigfish/internal/service"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/kbgod/illuminate"
+	"github.com/kbgod/tg-bot-layout/config"
+	"github.com/kbgod/tg-bot-layout/internal/database"
+	"github.com/kbgod/tg-bot-layout/internal/handler"
+	observerpkg "github.com/kbgod/tg-bot-layout/internal/observer"
+	"github.com/kbgod/tg-bot-layout/internal/service"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 func main() {
@@ -55,7 +56,7 @@ func main() {
 	}
 	observer.Logger.Info().Str("username", botClient.Username).Msg("bot authorized")
 
-	h := handler.New(svc, botClient, botClient.User)
+	h := handler.New(svc, botClient)
 
 	if err := h.Run(ctx); err != nil {
 		observer.Logger.Fatal().Err(err).Msg("run handler")

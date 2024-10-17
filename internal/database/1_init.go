@@ -2,7 +2,7 @@ package database
 
 import (
 	"github.com/go-gormigrate/gormigrate/v2"
-	"github.com/kbgod/pigfish/internal/entity"
+	"github.com/kbgod/tg-bot-layout/internal/entity"
 	"gorm.io/gorm"
 )
 

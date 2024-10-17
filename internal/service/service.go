@@ -1,7 +1,7 @@
 package service
 
 import (
-	observerpkg "github.com/kbgod/pigfish/internal/observer"
+	observerpkg "github.com/kbgod/tg-bot-layout/internal/observer"
 	"gorm.io/gorm"
 )
 

@@ -1,8 +1,9 @@
 package entity
 
 import (
-	"github.com/kbgod/pigfish/pkg/tgutil"
 	"time"
+
+	"github.com/kbgod/tg-bot-layout/pkg/tgutil"
 )
 
 type UserRole string

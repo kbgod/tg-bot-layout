@@ -5,13 +5,13 @@ import (
 	"fmt"
 
 	"github.com/kbgod/illuminate"
-	"github.com/kbgod/pigfish/internal/entity"
+	"github.com/kbgod/tg-bot-layout/internal/entity"
 	"gorm.io/gorm"
 )
 
 func (s *Service) GetUser(tgUser *illuminate.User, isPrivate bool, promo *string) (*entity.User, error) {
 	var user entity.User
-	if err := s.db.Take(&user, tgUser.ID).Error; err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+	if err := s.db.Take(&user, tgUser.Id).Error; err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, fmt.Errorf("get user: %w", err)
 	} else if err == nil {
 		mustUpdate := make(map[string]any)
@@ -36,16 +36,16 @@ func (s *Service) GetUser(tgUser *illuminate.User, isPrivate bool, promo *string
 		return nil, nil
 	}
 
-	user.ID = tgUser.ID
+	user.ID = tgUser.Id
 	user.FirstName = tgUser.FirstName
 	user.Username = tgUser.Username
 
 	if promo != nil {
 		p, err := entity.GetPromoByName(s.db, *promo)
-		if err != nil {
-			return nil, fmt.Errorf("get promo by name: %w", err)
+		if err == nil {
+			user.PromoID = &p.ID
 		}
-		user.PromoID = &p.ID
+
 	}
 
 	if err := s.db.Create(&user).Error; err != nil {

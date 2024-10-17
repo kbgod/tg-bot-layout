@@ -2,7 +2,7 @@ package database
 
 import (
 	"github.com/go-gormigrate/gormigrate/v2"
-	observerpkg "github.com/kbgod/pigfish/internal/observer"
+	observerpkg "github.com/kbgod/tg-bot-layout/internal/observer"
 	"gorm.io/gorm"
 )
 
